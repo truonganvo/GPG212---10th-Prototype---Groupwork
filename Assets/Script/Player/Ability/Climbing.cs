@@ -10,6 +10,7 @@ public class Climbing : MonoBehaviour
     private KeyCode moveKey = KeyCode.W; // The key that the player must press or hold to move in the Y position
     private bool isMoving; // Whether or not the player is currently moving in the Y position
 
+    public bool isWallClimbOn = false;
 
     private void Start()
     {
@@ -19,18 +20,21 @@ public class Climbing : MonoBehaviour
     {
         if (other.CompareTag("Wall"))
         {
-            // Check if the move key is pressed or held down
-            if (Input.GetKey(moveKey))
+            if(isWallClimbOn)
             {
-                // Start moving the player in the Y position
-                isMoving = true;
-                rb.isKinematic = true;
-            }
-            else
-            {
-                // Stop moving the player in the Y position
-                isMoving = false;
-                rb.isKinematic = false;
+                // Check if the move key is pressed or held down
+                if (Input.GetKey(moveKey))
+                {
+                    // Start moving the player in the Y position
+                    isMoving = true;
+                    rb.isKinematic = true;
+                }
+                else
+                {
+                    // Stop moving the player in the Y position
+                    isMoving = false;
+                    rb.isKinematic = false;
+                }
             }
         }
     }

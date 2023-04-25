@@ -24,6 +24,7 @@ public class Movement : MonoBehaviour
     private void FixedUpdate()
     {
         MovementController();
+        CameraEdit();
     }
 
     private void MovementController()
@@ -45,7 +46,26 @@ public class Movement : MonoBehaviour
         {
             transform.rotation = Quaternion.FromToRotation(Vector3.up, info.normal);
         }
+    }
 
+    private void CameraEdit()
+    {
+        Vector3 cameraForward = Camera.main.transform.forward;
+        Vector3 cameraRight = Camera.main.transform.right;
+
+        // Flatten the direction vectors to ignore the camera's tilt
+        cameraForward.y = 0f;
+        cameraRight.y = 0f;
+        cameraForward.Normalize();
+        cameraRight.Normalize();
+
+        // Calculate the movement vector based on input and camera direction
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        Vector3 movement = (horizontal * cameraRight + vertical * cameraForward).normalized * speed;
+
+        // Move the player using the Rigidbody
+        rb.MovePosition(rb.position + movement * Time.fixedDeltaTime);
     }
 
 }

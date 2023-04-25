@@ -5,7 +5,6 @@ using UnityEngine;
 public class Dashing : MonoBehaviour
 {
     public Transform orientation;
-    public Transform playerCam;
     private Rigidbody rb;
     private Movement movementScript;
 
@@ -14,7 +13,7 @@ public class Dashing : MonoBehaviour
     public float dashDuration;
 
     public float dashCooldown;
-    private float dashCdTimer;
+    [SerializeField] float dashCdTimer;
 
     public KeyCode dashKey = KeyCode.E;
 
@@ -22,6 +21,9 @@ public class Dashing : MonoBehaviour
     public bool useCameraFoward = true;
     public bool allowAllDirection = true;
     public bool resetVelocity = true;
+
+    [Header("Setting")]
+    public bool isDashingOn = false;
 
     private void Start()
     {
@@ -31,13 +33,16 @@ public class Dashing : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(dashKey))
+        if (isDashingOn)
         {
-            Dash();
-        }
-        if (dashCdTimer > 0)
-        {
-            dashCdTimer -= Time.deltaTime;
+            if (Input.GetKeyUp(dashKey))
+            {
+                Dash();
+            }
+            if (dashCdTimer > 0)
+            {
+                dashCdTimer -= Time.deltaTime;
+            }
         }
     }
 
@@ -46,31 +51,11 @@ public class Dashing : MonoBehaviour
         if (dashCdTimer > 0) return;
         else dashCdTimer = dashCooldown;
 
-        Transform forwardT;
-        if (useCameraFoward)
-        {
-            forwardT = playerCam;
-        }
-        else
-        {
-            forwardT = orientation;
-        }
-
-        Vector3 direction = GetDirection(forwardT);
-
-        Vector3 forceToApply = direction * dashForce + orientation.up * dashUpwardForce;
-        rb.AddForce(forceToApply, ForceMode.Impulse);
-
-
-
-        Invoke(nameof(ResetDash), dashDuration);
+        Vector3 dashDirection = Camera.main.transform.forward; // Get the direction that the camera is facing
+        rb.MovePosition(rb.position + dashDirection.normalized * dashForce * Time.fixedDeltaTime); // Move the player using the Rigidbody
     }
 
-    private void ResetDash()
-    {
-
-    }
-
+    //This function allow the player to dash toward a direction based on the direction they moving with the key bind
     private Vector3 GetDirection(Transform forwardT)
     {
         float horizontal = Input.GetAxisRaw("Horizontal");

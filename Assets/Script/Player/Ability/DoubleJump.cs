@@ -12,6 +12,8 @@ public class DoubleJump : MonoBehaviour
     [SerializeField] int maximumJumpCount = 2;
     [SerializeField] int remainJump = 0;
 
+    public bool isDoubleJumpOn = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,10 +23,13 @@ public class DoubleJump : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && remainJump > 0)
+        if (isDoubleJumpOn)
         {
-            rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
-            remainJump -= 1;
+            if (Input.GetKeyDown(KeyCode.Space) && remainJump > 0)
+            {
+                rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+                remainJump -= 1;
+            }
         }
     }
 

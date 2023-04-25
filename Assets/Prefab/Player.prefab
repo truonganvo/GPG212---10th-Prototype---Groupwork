@@ -137,8 +137,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1545753386791201115}
-  - component: {fileID: 1545753386791201118}
   - component: {fileID: 377249734423944301}
+  - component: {fileID: 1545753386791201118}
   - component: {fileID: -719441303361322389}
   - component: {fileID: -2579010868699336085}
   - component: {fileID: 4427381814710933705}
@@ -166,23 +166,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1545753386791201118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1545753386791201114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3e556f97076e0644afb756c13acec5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 40
-  coefficienct: 10
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!114 &377249734423944301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +180,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rb: {fileID: 4427381814710933705}
+  isWallClimbOn: 0
+--- !u!114 &1545753386791201118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545753386791201114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3e556f97076e0644afb756c13acec5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  coefficienct: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!114 &-719441303361322389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,12 +211,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 1545753384822006769}
-  playerCam: {fileID: 0}
   dashForce: 10
   dashUpwardForce: 0
   dashDuration: 0.25
   dashCooldown: 2
+  dashCdTimer: 0
   dashKey: 101
+  useCameraFoward: 1
+  allowAllDirection: 1
+  resetVelocity: 1
+  isDashingOn: 0
 --- !u!114 &-2579010868699336085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +237,7 @@ MonoBehaviour:
   grounded: 0
   maximumJumpCount: 2
   remainJump: 0
+  isDoubleJumpOn: 0
 --- !u!54 &4427381814710933705
 Rigidbody:
   m_ObjectHideFlags: 0
