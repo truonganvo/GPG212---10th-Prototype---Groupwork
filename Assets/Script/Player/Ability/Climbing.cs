@@ -10,11 +10,20 @@ public class Climbing : MonoBehaviour
     private KeyCode moveKey = KeyCode.W; // The key that the player must press or hold to move in the Y position
     private bool isMoving; // Whether or not the player is currently moving in the Y position
 
+    [SerializeField] GameObject canvas;
     public bool isWallClimbOn = false;
 
     private void Start()
     {
         rb.isKinematic = false;
+    }
+    private void Update()
+    {
+        if (isWallClimbOn)
+        {
+            canvas.SetActive(true);
+            Invoke("CanvasDisable", 5f);
+        }
     }
     private void OnTriggerStay(Collider other)
     {
@@ -56,5 +65,10 @@ public class Climbing : MonoBehaviour
             Vector3 moveVector = new Vector3(0f, moveSpeed * Time.fixedDeltaTime, 0f);
             transform.position += moveVector;
         }
+    }
+
+    private void CanvasDisable()
+    {
+        Destroy(canvas);
     }
 }

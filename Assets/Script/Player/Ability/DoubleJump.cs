@@ -6,12 +6,13 @@ public class DoubleJump : MonoBehaviour
 {
     private Rigidbody rb;
 
-    public float jumpHeight = 10f;
-    public bool grounded;
+    [SerializeField] float jumpHeight = 20f;
+    [SerializeField] bool grounded;
 
     [SerializeField] int maximumJumpCount = 2;
     [SerializeField] int remainJump = 0;
 
+    [SerializeField] GameObject canvas;
     public bool isDoubleJumpOn = false;
 
     // Start is called before the first frame update
@@ -30,6 +31,9 @@ public class DoubleJump : MonoBehaviour
                 rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
                 remainJump -= 1;
             }
+
+            canvas.SetActive(true);
+            Invoke("CanvasDisable", 5f);
         }
     }
 
@@ -47,5 +51,10 @@ public class DoubleJump : MonoBehaviour
         {
             grounded = false;
         }
+    }
+
+    private void CanvasDisable()
+    {
+        Destroy(canvas);
     }
 }

@@ -24,6 +24,7 @@ public class Dashing : MonoBehaviour
 
     [Header("Setting")]
     public bool isDashingOn = false;
+    [SerializeField] GameObject canvas;
 
     private void Start()
     {
@@ -43,6 +44,9 @@ public class Dashing : MonoBehaviour
             {
                 dashCdTimer -= Time.deltaTime;
             }
+
+            canvas.SetActive(true);
+            Invoke("CanvasDisable", 5f);
         }
     }
 
@@ -76,5 +80,10 @@ public class Dashing : MonoBehaviour
             direction = forwardT.forward;
         }
         return direction.normalized ;
+    }
+
+    private void CanvasDisable()
+    {
+        Destroy(canvas);
     }
 }

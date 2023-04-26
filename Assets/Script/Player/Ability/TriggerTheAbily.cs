@@ -5,6 +5,7 @@ using UnityEngine;
 public class TriggerTheAbily : MonoBehaviour
 {
     [SerializeField] DoubleJump isJumpOn;
+    [SerializeField] GameObject canvas;
 
     //Double Jump Activate
     private void OnCollisionEnter(Collision collision)
