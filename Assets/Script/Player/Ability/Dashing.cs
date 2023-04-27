@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Dashing : MonoBehaviour
 {
@@ -50,14 +51,13 @@ public class Dashing : MonoBehaviour
             if (dashCdTimer > 0)
             {
                 dashCdTimer -= Time.deltaTime;
+                dashCd.text = dashCdTimer.ToString()[0].ToString();
             }
 
             DashIcon.SetActive(true);
             canvas.SetActive(true);
             Invoke("CanvasDisable", 5f);
         }
-
-        dashCd.text = dashCdTimer.ToString();
     }
 
     private void Dash()

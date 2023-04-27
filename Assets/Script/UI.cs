@@ -14,7 +14,14 @@ public class UI : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene("Win");
+            SceneManager.LoadScene("WinScene");
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
+    }
+
+    public void LoadMainMu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 }
