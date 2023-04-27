@@ -59,6 +59,7 @@ public class Climbing : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //if isMoving is set true then move player up to the wall in Y direction
         if (isMoving)
         {
             // Move the player in the Y position

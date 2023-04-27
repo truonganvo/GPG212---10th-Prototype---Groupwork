@@ -9,4 +9,12 @@ public class UI : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            SceneManager.LoadScene("Win");
+        }
+    }
 }

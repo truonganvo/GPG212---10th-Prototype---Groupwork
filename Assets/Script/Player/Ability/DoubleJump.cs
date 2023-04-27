@@ -15,15 +15,15 @@ public class DoubleJump : MonoBehaviour
     [SerializeField] GameObject canvas;
     public bool isDoubleJumpOn = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
+        //CHeck if isDoubleJumpOn boolean is true;
         if (isDoubleJumpOn)
         {
             if (Input.GetKeyDown(KeyCode.Space) && remainJump > 0)
@@ -39,6 +39,7 @@ public class DoubleJump : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
+        //When the character land on the ground & reset the jump count
         if(collision.gameObject.tag == "Ground")
         {
             grounded= true;
