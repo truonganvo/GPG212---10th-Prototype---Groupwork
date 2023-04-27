@@ -1,31 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Dashing : MonoBehaviour
 {
+    [Header("Player")]
     public Transform orientation;
     private Rigidbody rb;
     private Movement movementScript;
 
-    public float dashForce;
-    public float dashUpwardForce;
-    public float dashDuration;
+    [Header("Dashing")]
+    [SerializeField] float dashForce;
+    [SerializeField] float dashUpwardForce;
+    [SerializeField] float dashDuration;
 
     public float dashCooldown;
     [SerializeField] float dashCdTimer;
+    [SerializeField] TextMeshProUGUI dashCd;
 
     public KeyCode dashKey = KeyCode.E;
 
     [Header("Setting")]
-    public bool useCameraFoward = true;
-    public bool allowAllDirection = true;
-    public bool resetVelocity = true;
+    [SerializeField] bool useCameraFoward = true;
+    [SerializeField] bool allowAllDirection = true;
+    [SerializeField] bool resetVelocity = true;
 
-    [Header("Setting")]
+    [Header("Check")]
     public bool isDashingOn = false;
     [SerializeField] GameObject canvas;
 
+
+    //This is for fun, delete it if you want 
+    [SerializeField] GameObject DashIcon;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -45,9 +52,12 @@ public class Dashing : MonoBehaviour
                 dashCdTimer -= Time.deltaTime;
             }
 
+            DashIcon.SetActive(true);
             canvas.SetActive(true);
             Invoke("CanvasDisable", 5f);
         }
+
+        dashCd.text = dashCdTimer.ToString();
     }
 
     private void Dash()

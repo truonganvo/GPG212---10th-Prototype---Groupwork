@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] float speed, coefficienct;
+    [SerializeField] float speed;
     public LayerMask whatIsGround;
 
     private Rigidbody rb;
@@ -23,21 +23,10 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MovementController();
-        CameraEdit();
+        CharacterMovement();
     }
 
-    private void MovementController()
-    {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 movement = new Vector3(horizontal, 0, vertical);
-        Vector3 counterMovement = new Vector3(-rb.velocity.x, 0, -rb.velocity.z);
-
-        rb.AddForce(movement * speed);
-        rb.AddForce(counterMovement * coefficienct);
-    }
-
+    //Making the player snap to surface terrain - not sure if its work or not, if not then have rigidbody on the player
     private void SurfaceAllign()
     {
         Ray ray = new Ray(transform.position, -transform.up);
@@ -48,7 +37,8 @@ public class Movement : MonoBehaviour
         }
     }
 
-    private void CameraEdit()
+    //Make the character move at the direction that the camera face
+    private void CharacterMovement()
     {
         Vector3 cameraForward = Camera.main.transform.forward;
         Vector3 cameraRight = Camera.main.transform.right;
