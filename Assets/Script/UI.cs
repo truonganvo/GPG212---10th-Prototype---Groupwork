@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
-    public void GameScene()
+    public void LoadNextScene()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("UI");
     }
 }
